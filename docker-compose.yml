@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3001:3000"
+    volumes:
+      - checkins_data:/app/data
+      # Live-reflect frontend changes without rebuilding the image
+      - ./public:/app/public
+    restart: unless-stopped
+
+volumes:
+  checkins_data:

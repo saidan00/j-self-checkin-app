@@ -1,0 +1,15 @@
+{
+  "name": "j-self-checkin-app",
+  "version": "1.0.0",
+  "description": "Self check-in web application with JSON file storage",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
