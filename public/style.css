@@ -438,3 +438,21 @@ body {
     gap: 0.25rem;
   }
 }
+
+/* Nyan cat — just for fun */
+.nyan-cat {
+  position: fixed;
+  top: 120px;
+  right: 0px;
+  width: 180px;
+  height: auto;
+  z-index: 1000;
+  pointer-events: none;
+  transform: scaleX(-1);
+}
+
+@media (max-width: 480px) {
+  .nyan-cat {
+    width: 80px;
+  }
+}
