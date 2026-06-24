@@ -10,6 +10,7 @@ const goHomeTextEl = document.getElementById('go-home-text');
 const goHomeSubtextEl = document.getElementById('go-home-subtext');
 const streakEl = document.getElementById('streak');
 const streakTextEl = document.getElementById('streak-text');
+const happyModeEl = document.getElementById('happy-mode');
 const checkinBtn = document.getElementById('checkin-btn');
 const btnLabel = checkinBtn.querySelector('.btn-label');
 const btnSpinner = checkinBtn.querySelector('.btn-spinner');
@@ -102,11 +103,25 @@ function updateGoHomeUI() {
   }
 }
 
+// During work hours show "happy mode off"; once work is over (or before a
+// work session starts), show "happy mode on".
+function updateHappyMode() {
+  const inWorkHours =
+    checkedInToday && todayRecord && new Date() < getWorkEndTime(todayRecord);
+  const src = inWorkHours ? 'happy_mode_off.gif' : 'happy_mode_on.gif';
+
+  happyModeEl.classList.remove('hidden');
+  if (!happyModeEl.src.endsWith(src)) {
+    happyModeEl.src = src;
+  }
+}
+
 function updateClock() {
   const now = new Date();
   clockTimeEl.textContent = timeFormat.format(now);
   clockDateEl.textContent = dateFormat.format(now);
   updateGoHomeUI();
+  updateHappyMode();
 }
 
 function initClock() {

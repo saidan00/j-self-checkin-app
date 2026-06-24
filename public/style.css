@@ -456,3 +456,24 @@ body {
     width: 80px;
   }
 }
+
+/* Happy mode indicator — bottom left, toggles with work hours */
+.happy-mode {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 180px;
+  height: auto;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.happy-mode.hidden {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .happy-mode {
+    width: 80px;
+  }
+}
