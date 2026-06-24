@@ -216,6 +216,9 @@ function updateStatusUI(status) {
   updateButtonState();
 }
 
+// Number of most recent weeks to display in the history list.
+const MAX_HISTORY_WEEKS = 3;
+
 function renderHistory(checkins) {
   historyListEl.innerHTML = '';
 
@@ -226,9 +229,22 @@ function renderHistory(checkins) {
 
   historyEmptyEl.classList.add('hidden');
 
+  // checkins are sorted newest first; keep only the 3 most recent weeks.
+  const recentWeekKeys = [];
+  const recentCheckins = checkins.filter((item) => {
+    const weekKey = getWeekKey(item.date);
+    if (!recentWeekKeys.includes(weekKey)) {
+      if (recentWeekKeys.length >= MAX_HISTORY_WEEKS) {
+        return false;
+      }
+      recentWeekKeys.push(weekKey);
+    }
+    return true;
+  });
+
   let currentWeekKey = null;
 
-  checkins.forEach((item, index) => {
+  recentCheckins.forEach((item, index) => {
     const weekKey = getWeekKey(item.date);
     if (weekKey !== currentWeekKey) {
       currentWeekKey = weekKey;
